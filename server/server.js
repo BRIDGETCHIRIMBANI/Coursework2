@@ -6,12 +6,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const CalendarControllers = require('./Controllers/CalendarControllers');
 const SignupControllers = require('./Controllers/SignupControllers');
+const AdminController = require('./Controllers/AdminController');
+const EventDashboardController = require('./Controllers/EventDashboardController');
 
 const app = express();
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -28,3 +29,5 @@ mongoose
 
 app.use('/api/calendar', require('./Controllers/CalendarControllers'));
 app.use('/api', require('./Controllers/SignupControllers'));
+app.use('/api', require('./Controllers/AdminController'));
+app.use('/api/calendar', require('./Controllers/EventDashboardController'));
